@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinForms_da_test02.Page2">
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="#ECEFF1">
+            <StackLayout Spacing="0">
+
+                <Button Text="назад" Margin="0,16,306,16"  Padding="0" FontSize="18" TextTransform="Lowercase" 
+                        TextColor="Black"
+                        BackgroundColor="#ECEFF1"
+                        Clicked="ChangeScreen"/>
+
+                <Label Margin="16" FontAttributes="Bold" TextDecorations="None" HorizontalTextAlignment="Start" 
+               Text="Сегодня мы с тобой потренируем грудь и плечи" FontSize="32"  TextColor="Black">
+                </Label>
+
+                <Label Margin="16, 16, 16, 16" FontAttributes="None" TextDecorations="None" HorizontalTextAlignment="Start" 
+               Text="Ниже ты найдёшь все упражнения, которые предстоит выполнить, 
+                       в любом порядке. Давай выберем первое упражнение и начнём!"
+                       FontSize="18"  TextColor="Black">
+                </Label>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
