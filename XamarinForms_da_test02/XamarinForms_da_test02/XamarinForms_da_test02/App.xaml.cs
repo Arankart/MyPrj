@@ -9,10 +9,9 @@ namespace XamarinForms_da_test02
         
         public App()
         {
-
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Page2());
+            MainPage = new NavigationPage(new Page2(1));
         }
 
         protected override void OnStart()

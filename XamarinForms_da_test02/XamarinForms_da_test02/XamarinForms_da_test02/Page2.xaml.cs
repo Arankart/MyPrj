@@ -9,62 +9,57 @@ using Xamarin.Forms.Xaml;
 
 namespace XamarinForms_da_test02
 {
-    public class PracticInfo
-    {
-        string header;
-        string lower;
-        string image;
-
-        public PracticInfo(string header, string lower, string image)
-        {
-            this.header = header;
-            this.lower = lower;
-            this.image = image;
-        }
-    }
-
-    public class Info
-    {
-        string header;
-        string lower;
-        List<PracticInfo> lpi = new List<PracticInfo>();
-
-        public Info(string header, string lower, List<PracticInfo> lpi)
-        {
-            this.header = header;
-            this.lower = lower;
-            this.lpi = lpi;
-        }
-    } 
-
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page2 : ContentPage
     {
-        public Page2()
+        public int return_id;
+
+        public InfoPage[] infos =
+                {
+                    new InfoPage("Сегодня мы с тобой потренируем грудь и трицепц",
+                    "Ниже ты найдёшь все упражнения, которые предстоит выполнить, в любом порядке. Давай выберем первое упражнение и начнём!",
+                    new List<PracticInfo>() {
+                        new PracticInfo("Header 1", "Lower 1 text in this place", "Image 1"),
+                        new PracticInfo("Header 2", "Lower 2 text in this place", "Image 2"),
+                        new PracticInfo("Header 3", "Lower 3 text in this place", "Image 3")
+                    }),
+
+                    new InfoPage("Сегодня мы с тобой потренируем спину и бицепц",
+                    "Ниже ты найдёшь все упражнения, которые предстоит выполнить, в любом порядке. " +
+                    " Давай выберем первое упражнение и начнём!",
+                    new List<PracticInfo>() {
+                        new PracticInfo("Header 1", "Lower 1 text in this place", "Image 1"),
+                        new PracticInfo("Header 2", "Lower 2 text in this place", "Image 2"),
+                        new PracticInfo("Header 3", "Lower 3 text in this place", "Image 3")
+                    }),
+
+                    new InfoPage("Сегодня мы с тобой потренируем ноги и пресс",
+                    "Ниже ты найдёшь все упражнения, которые предстоит выполнить, в любом порядке. " +
+                    " Давай выберем первое упражнение и начнём!",
+                    new List<PracticInfo>() {
+                        new PracticInfo("Header 1", "Lower 1 text in this place", "Image 1"),
+                        new PracticInfo("Header 2", "Lower 2 text in this place", "Image 2"),
+                        new PracticInfo("Header 3", "Lower 3 text in this place", "Image 3")
+                    })
+                };
+
+        public Page2(int id)
         {
             InitializeComponent();
 
-            Info[] infos = {
-                new Info("1","2",new List<PracticInfo>() {new PracticInfo("1","2","3")}),
-                new Info("1","2",new List<PracticInfo>()),
-                new Info("1","2",new List<PracticInfo>()),
-            };
+            return_id = id;
 
-            List<string> header = new List<string>() { "Header 1", "Header 2", "Header 3", "Header 4" };
-
-            List<string> lower = new List<string>() { "Lower 1 text in this place", "Lower 2 text in this place", "Lower 3 text in this place", "Lower 4 text in this place" };
-
+            infos[id].lpi.Add(new PracticInfo("Header 4", "Lower 34 text in this place", "Image 4"));
 
             // Создаём элементы страницы
 
-            Title = "Тренировочная страница";
 
             Label infoLabel_main = new Label()
             {
-                Margin = new Thickness(16),
+                Margin = new Thickness(16, 4, 16, 16),
                 FontAttributes = FontAttributes.Bold,
                 HorizontalTextAlignment = TextAlignment.Start,
-                Text = "Сегодня мы с тобой потренируем грудь и плечи",
+                Text = infos[id].topWelcomeInfo,
                 FontSize = 32,
                 TextColor = Color.Black,
             };
@@ -74,7 +69,7 @@ namespace XamarinForms_da_test02
                 Margin = new Thickness(16, 16, 16, 16),
                 FontAttributes = FontAttributes.None,
                 HorizontalTextAlignment = TextAlignment.Start,
-                Text = "Ниже ты найдёшь все упражнения, которые предстоит выполнить, в любом порядке. Давай выберем первое упражнение и начнём!",
+                Text = infos[id].downWelcomeInfo,
                 FontSize = 18,
                 TextColor = Color.Black,
             };
@@ -90,7 +85,6 @@ namespace XamarinForms_da_test02
                 BackgroundColor = Color.FromHex("#ECEFF1"),
             };
 
-
             // Добавляем элементы страницы
 
             StackLayout stackLayout = new StackLayout()
@@ -104,7 +98,7 @@ namespace XamarinForms_da_test02
 
             // Создаём таблицу
 
-            for (int i = 0; i < header.Count(); i++)
+            for (int i = 0; i < infos[id].lpi.Count; i++)
             {
 
                 Grid grid_elements = new Grid()
@@ -112,17 +106,16 @@ namespace XamarinForms_da_test02
                     Margin = new Thickness(16, 0, 16, 16),
 
                     RowDefinitions =
-                {
-                    new RowDefinition { Height = 64 },
-                    new RowDefinition { Height = 64 }
-                },
+                    {
+                        new RowDefinition { Height = 64 },
+                        new RowDefinition { Height = 64 }
+                    },
+
                     ColumnDefinitions =
-                {
-                    new ColumnDefinition {},
-                    new ColumnDefinition {}
-                }
-
-
+                    {
+                        new ColumnDefinition {},
+                        new ColumnDefinition {}
+                    }
                 };
 
                 if (i == 0)
@@ -140,12 +133,13 @@ namespace XamarinForms_da_test02
                     BackgroundColor = Color.Red,
                     CornerRadius = 16,
                     TextTransform = TextTransform.None,
+                    ClassId = Convert.ToString(i),
 
                 };
 
                 Label header_label = new Label
                 {
-                    Text = header[i],
+                    Text = infos[id].lpi[i].header,
                     Margin = new Thickness(0, 16, 16, 0),
                     TextColor = Color.Black,
                     FontSize = 20,
@@ -154,7 +148,7 @@ namespace XamarinForms_da_test02
 
                 Label lower_label = new Label
                 {
-                    Text = lower[i],
+                    Text = infos[id].lpi[i].lower,
                     Margin = new Thickness(0, -10, 16, 0),
                     TextColor = Color.Black,
                     FontSize = 14,
@@ -162,13 +156,6 @@ namespace XamarinForms_da_test02
                     TextTransform = TextTransform.Lowercase,
                 };
 
-                /*Button practic_bttn = new Button()
-                {
-                    BackgroundColor = Color.FromHex("#FFFFFF"),
-                    CornerRadius = 16,
-                    Opacity = 0,
-
-                };*/
 
                 Frame bg_practic = new Frame()
                 {
@@ -182,8 +169,6 @@ namespace XamarinForms_da_test02
 
                 grid_elements.Children.Add(bg_practic, 0, 0);
 
-                //grid_elements.Children.Add(practic_bttn, 0, 0);
-
                 grid_elements.Children.Add(image_bttn, 0, 0);
 
                 grid_elements.Children.Add(header_label, 1, 0);
@@ -195,6 +180,7 @@ namespace XamarinForms_da_test02
                 Grid.SetColumnSpan(bg_practic, 2);
                 Grid.SetRowSpan(bg_practic, 2);
 
+                image_bttn.Clicked += ToPracticScreen;
 
                 stackLayout.Children.Add(grid_elements);
 
@@ -205,16 +191,49 @@ namespace XamarinForms_da_test02
 
             /// Добавляем таблицы на страницу
 
-            button_returnToHome.Clicked += ChangeScreen;
+            button_returnToHome.Clicked += ToMainScreen;
 
             scrollView.Content = stackLayout;
 
             this.Content = scrollView;
         }
 
-        public async void ChangeScreen(object sender, EventArgs args)
+        public async void ToMainScreen(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new MainPage());
+        }
+
+        public async void ToPracticScreen(object sender, EventArgs args)
+        {
+            Button bttn = (Button)sender;
+
+            string id = Convert.ToString(infos[return_id].lpi.Count);
+
+            switch (bttn.ClassId)
+            {
+
+                case "0":
+                    id = infos[return_id].lpi[0].header;
+                    break;
+                case "1":
+                    id = infos[return_id].lpi[1].header;
+                    break;
+                case "2":
+                    id = infos[return_id].lpi[2].header;
+                    break;
+                case "3":
+                    id = infos[return_id].lpi[3].header;
+                    break;
+                case "4":
+                    id = infos[return_id].lpi[4].header;
+                    break;
+                case "5":
+                    id = infos[return_id].lpi[5].header;
+                    break;
+
+            }
+
+            await Navigation.PushAsync(new PracticPage(return_id, id));
         }
     }
 }

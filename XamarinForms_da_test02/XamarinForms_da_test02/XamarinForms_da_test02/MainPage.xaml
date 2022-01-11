@@ -41,13 +41,13 @@
                     <RowDefinition Height="156" />
                 </Grid.RowDefinitions>
 
-                <Button x:Name="tricepc_bttn"  BackgroundColor="#2C2C2C" TextColor="White" CornerRadius="16" 
+                <Button ClassId="tricepc_bttn" x:Name="tricepc_bttn"  BackgroundColor="#2C2C2C" TextColor="White" CornerRadius="16" 
                     Margin="16, 32, 4, 4" Padding="8" Text="Грудь и трицепц" Clicked="ChangeScreen"/>
 
-                <Button x:Name="back_bttn" BackgroundColor="#2C2C2C" TextColor="White" CornerRadius="16" 
+                <Button ClassId="back_bttn" x:Name="back_bttn" BackgroundColor="#2C2C2C" TextColor="White" CornerRadius="16" 
                     Margin="4, 32, 16, 4" Text="Спина и бицепц" Grid.Column="1" Clicked="ChangeScreen"/>
 
-                <Button x:Name="legs_bttn" BackgroundColor="#2C2C2C" TextColor="White" CornerRadius="16" 
+                <Button ClassId="legs_bttn" x:Name="legs_bttn" BackgroundColor="#2C2C2C" TextColor="White" CornerRadius="16" 
                     Margin="16, 4, 4, 4" Text="Ноги и пресс" Grid.Row="1" Clicked="ChangeScreen"/>
 
                 <Button BackgroundColor="LightGray" TextColor="DimGray" CornerRadius="16" 

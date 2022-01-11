@@ -10,7 +10,6 @@ namespace XamarinForms_da_test02
 {
     public partial class MainPage : ContentPage
     {
-        public bool tricepc, back, leg;
 
         public MainPage()
         {
@@ -21,28 +20,29 @@ namespace XamarinForms_da_test02
 
         public void Button_Clicked(object sender, EventArgs args)
         {
-/*            if (text_ch == true)
-            {
-                MyButton.Text = "I've been clicked!";
-                text_ch = false;
-            }
-            else
-            {
-                MyButton.Text = "Click Me!";
-                text_ch = true;
-            }*/
+
         }
 
         public async void ChangeScreen(object sender, EventArgs args)
         {
-            await Navigation.PushAsync(new Page2());
-            /*
-            if (tricepc_bttn.Clicked)
-                tricepc = true;
-            else if (back_bttn.Clicked +=)
-                back = true;
-            else if (legs_bttn.Clicked +=)
-                leg = true; */
+            Button btn = (Button)sender;
+
+            int id = -1;
+
+            switch (btn.ClassId)
+            {
+                case "tricepc_bttn":
+                    id = 0;
+                    break;
+                case "back_bttn":
+                    id = 1;
+                    break;
+                case "legs_bttn":
+                    id = 2;
+                    break;
+            }
+
+            await Navigation.PushAsync(new Page2(id));
         }
     }
 }
