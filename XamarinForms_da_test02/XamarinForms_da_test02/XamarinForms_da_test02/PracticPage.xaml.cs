@@ -26,10 +26,13 @@ namespace XamarinForms_da_test02
                 BackgroundColor = Color.FromHex("#ECEFF1"),
             };
 
-            Frame imageFrame = new Frame()
+            Image imageFrame = new Image()
             {
-                BackgroundColor = Color.Red,
-                Padding = new Thickness(0, 0, 0, 348),
+                //BackgroundColor = Color.Red,
+                WidthRequest = 100,
+                HeightRequest = 348,
+                //Padding = new Thickness(0, 0, 0, 348),
+                Source = "https://vjoy.cc/wp-content/uploads/2019/05/1-54.jpg"
             };
 
             Label text = new Label()
@@ -44,7 +47,7 @@ namespace XamarinForms_da_test02
 
             Button button_returnToInfoScreen = new Button()
             {
-                Margin = new Thickness(0, 16, 306, 16),
+                Margin = new Thickness(16, 16, 306, 16),
                 Text = "назад",
                 Padding = 0,
                 FontSize = 18,

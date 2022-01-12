@@ -19,18 +19,22 @@ namespace XamarinForms_da_test02
                     new InfoPage("Сегодня мы с тобой потренируем грудь и трицепц",
                     "Ниже ты найдёшь все упражнения, которые предстоит выполнить, в любом порядке. Давай выберем первое упражнение и начнём!",
                     new List<PracticInfo>() {
-                        new PracticInfo("Header 1", "Lower 1 text in this place", "Image 1"),
-                        new PracticInfo("Header 2", "Lower 2 text in this place", "Image 2"),
-                        new PracticInfo("Header 3", "Lower 3 text in this place", "Image 3")
+                        new PracticInfo("Подтягивания", "Lower 1 text in this place", "Image 1"),
+                        new PracticInfo("Жим от груди", "Lower 2 text in this place", "Image 2"),
+                        new PracticInfo("Узкий жим", "Lower 2 text in this place", "Image 2"),
+                        new PracticInfo("Разводка гантелей", "Lower 2 text in this place", "Image 2"),
+                        new PracticInfo("Разведение на трицепц в блоке", "Lower 3 text in this place", "Image 3")
                     }),
 
                     new InfoPage("Сегодня мы с тобой потренируем спину и бицепц",
                     "Ниже ты найдёшь все упражнения, которые предстоит выполнить, в любом порядке. " +
                     " Давай выберем первое упражнение и начнём!",
                     new List<PracticInfo>() {
-                        new PracticInfo("Header 1", "Lower 1 text in this place", "Image 1"),
-                        new PracticInfo("Header 2", "Lower 2 text in this place", "Image 2"),
-                        new PracticInfo("Header 3", "Lower 3 text in this place", "Image 3")
+                        new PracticInfo("Подтягивания широким хватом", "Lower 1 text in this place", "Image 1"),
+                        new PracticInfo("Становая тяга", "Lower 2 text in this place", "Image 2"),
+                        new PracticInfo("Подъём штанги на бицепц", "Lower 2 text in this place", "Image 2"),
+                        new PracticInfo("Тяга верхнего блока", "Lower 3 text in this place", "Image 3"),
+                        new PracticInfo("Подъём гантелей на бицепц", "Lower 3 text in this place", "Image 3")
                     }),
 
                     new InfoPage("Сегодня мы с тобой потренируем ноги и пресс",
@@ -48,8 +52,6 @@ namespace XamarinForms_da_test02
             InitializeComponent();
 
             return_id = id;
-
-            infos[id].lpi.Add(new PracticInfo("Header 4", "Lower 34 text in this place", "Image 4"));
 
             // Создаём элементы страницы
 
@@ -76,7 +78,7 @@ namespace XamarinForms_da_test02
 
             Button button_returnToHome = new Button()
             {
-                Margin = new Thickness(0, 16, 306, 16),
+                Margin = new Thickness(16, 16, 306, 16),
                 Text = "назад",
                 Padding = 0,
                 FontSize = 18,
@@ -128,13 +130,13 @@ namespace XamarinForms_da_test02
 
                 Button image_bttn = new Button()
                 {
-                    Text = "Image",
                     Margin = new Thickness(16),
-                    BackgroundColor = Color.Red,
+                    ImageSource = "https://vjoy.cc/wp-content/uploads/2019/05/1-54.jpg",
+                    //BackgroundColor = Color.Gray,
                     CornerRadius = 16,
-                    TextTransform = TextTransform.None,
                     ClassId = Convert.ToString(i),
-
+                    WidthRequest = 300,
+                    HeightRequest = 300,
                 };
 
                 Label header_label = new Label
@@ -149,7 +151,7 @@ namespace XamarinForms_da_test02
                 Label lower_label = new Label
                 {
                     Text = infos[id].lpi[i].lower,
-                    Margin = new Thickness(0, -10, 16, 0),
+                    Margin = new Thickness(0, 0, 16, 0),
                     TextColor = Color.Black,
                     FontSize = 14,
                     HorizontalOptions = LayoutOptions.Start,

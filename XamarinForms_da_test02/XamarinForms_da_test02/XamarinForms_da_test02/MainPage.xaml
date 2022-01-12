@@ -16,7 +16,13 @@
                     <RowDefinition Height="64" />
                 </Grid.RowDefinitions>
 
-                <Button Margin="20,16,0,20" CornerRadius="32" BackgroundColor="#B2B2B2" Grid.Row="0" Grid.Column="0"/>
+                <Button 
+                    Margin="20,16,0,20" 
+                    CornerRadius="32" 
+                    BackgroundColor="#B2B2B2" 
+                    Grid.Row="0" 
+                    Grid.Column="0"/>
+                
 
                 <Label Text="app name" Margin="0,16,16,16" FontSize="18" TextColor="#B2B2B2" Grid.Row="0" Grid.Column="1" ></Label>
             </Grid>
@@ -41,8 +47,14 @@
                     <RowDefinition Height="156" />
                 </Grid.RowDefinitions>
 
-                <Button ClassId="tricepc_bttn" x:Name="tricepc_bttn"  BackgroundColor="#2C2C2C" TextColor="White" CornerRadius="16" 
-                    Margin="16, 32, 4, 4" Padding="8" Text="Грудь и трицепц" Clicked="ChangeScreen"/>
+                <Button ClassId="tricepc_bttn" x:Name="tricepc_bttn"
+                        BackgroundColor="#2C2C2C"
+                        TextColor="White"
+                        CornerRadius="16" 
+                        Margin="16, 32, 4, 4"
+                        Padding="8"
+                        Text="Грудь и трицепц"
+                        Clicked="ChangeScreen"/>
 
                 <Button ClassId="back_bttn" x:Name="back_bttn" BackgroundColor="#2C2C2C" TextColor="White" CornerRadius="16" 
                     Margin="4, 32, 16, 4" Text="Спина и бицепц" Grid.Column="1" Clicked="ChangeScreen"/>
