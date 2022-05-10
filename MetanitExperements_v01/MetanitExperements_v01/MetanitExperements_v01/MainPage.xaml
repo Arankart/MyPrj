@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MetanitExperements_v01.MainPage">
+
+    <StackLayout Padding="0" BackgroundColor="#605C4E">
+        
+        <!--
+        <BoxView Color="#363020" 
+                 Margin="90,50,90,0" 
+                 HeightRequest="200"/>
+         -->
+
+        <Image Margin="90,80,90,0"  Source="smile.png" Scale="0.8"/>
+
+        <Label Margin="20, 20, 20, 0" 
+               TextColor="#EAFFDA" 
+               Text="Это заголовок"
+               HorizontalTextAlignment="Center"
+               FontSize="32"
+               FontAttributes="Bold">
+        </Label>
+
+        <Label Margin="60, 10, 60, 0" 
+               TextColor="#EAFFDA" 
+               Text="Label представляет обычную текстовую метку, которая выводит информацию с помощью свойства Text."
+               HorizontalTextAlignment="Center"
+               FontSize="18">
+        </Label>
+
+        <Button Margin="70, 20, 70, 0" 
+                Text="Следующая цитата" 
+                TextColor="#EAFFDA"
+                BackgroundColor="#A49966"
+                CornerRadius="32">
+        </Button>
+
+        <Entry Margin="40,20,20,0" x:Name="loginEntry" Placeholder = "Your Name"/>
+        <Entry Margin="40,20,20,0" x:Name="passwordEntry"  Placeholder = "Password" IsPassword ="True" />
+        <Label x:Name="textLabel" FontSize="Large" />
+
+    </StackLayout>
+
+</ContentPage>
