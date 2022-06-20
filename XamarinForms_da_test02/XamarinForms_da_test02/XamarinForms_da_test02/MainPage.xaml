@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinForms_da_test02.MainPage">
+             x:Class="XamarinForms_da_test02.MainPage" NavigationPage.HasNavigationBar="False">
 
-    <ScrollView BackgroundColor="#ECEFF1">
+    <ScrollView BackgroundColor="#181818">
         <StackLayout Spacing="0">
 
             <Grid>
@@ -22,17 +22,17 @@
                     BackgroundColor="#B2B2B2" 
                     Grid.Row="0" 
                     Grid.Column="0"/>
-                
+
 
                 <Label Text="app name" Margin="0,16,16,16" FontSize="18" TextColor="#B2B2B2" Grid.Row="0" Grid.Column="1" ></Label>
             </Grid>
 
             <Label Margin="16" FontAttributes="Bold" TextDecorations="None" HorizontalTextAlignment="Start" 
-               Text="Привет, друг,  что тренируем сегодня?" FontSize="32"  TextColor="Black">
+               Text="Привет, друг,  что тренируем сегодня?" FontSize="32"  TextColor="White">
             </Label>
 
             <Label Margin="16, 16, 128, 16" FontAttributes="None" TextDecorations="None" HorizontalTextAlignment="Start" 
-               Text="Выбери один и пунктов и мы составим тренировку для тебя" FontSize="18"  TextColor="Black">
+               Text="Выбери один и пунктов и мы составим тренировку для тебя" FontSize="18"  TextColor="LightGray">
             </Label>
 
             <Grid>
@@ -53,79 +53,22 @@
                         CornerRadius="16" 
                         Margin="16, 32, 4, 4"
                         Padding="8"
-                        Text="Грудь и трицепц"
+                        Text="Грудь и трицепс"
                         Clicked="ChangeScreen"/>
 
                 <Button ClassId="back_bttn" x:Name="back_bttn" BackgroundColor="#2C2C2C" TextColor="White" CornerRadius="16" 
-                    Margin="4, 32, 16, 4" Text="Спина и бицепц" Grid.Column="1" Clicked="ChangeScreen"/>
+                    Margin="4, 32, 16, 4" Text="Спина и бицепс" Grid.Column="1" Clicked="ChangeScreen"/>
 
                 <Button ClassId="legs_bttn" x:Name="legs_bttn" BackgroundColor="#2C2C2C" TextColor="White" CornerRadius="16" 
                     Margin="16, 4, 4, 4" Text="Ноги и пресс" Grid.Row="1" Clicked="ChangeScreen"/>
 
-                <Button BackgroundColor="LightGray" TextColor="DimGray" CornerRadius="16" 
+                <Button BackgroundColor="#1c1c1c" TextColor="DimGray" CornerRadius="16" 
                     Margin="4, 4, 16, 4" Text="В разработке..." Grid.Row="1" Grid.Column="1"/>
 
             </Grid>
 
-            <!--<Grid ColumnSpacing="0" RowSpacing="16" Margin="16,16,16,256">
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="142" />
-                    <RowDefinition Height="142" />
-                </Grid.RowDefinitions>
-
-                <Button BackgroundColor="#FFFFFF" Margin="0" CornerRadius="16"/>
-
-                <Grid ColumnSpacing="0" RowSpacing="0" Margin="8" >
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.4*"/>
-                        <ColumnDefinition Width="0.6*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="64" />
-                        <RowDefinition Height="64" />
-                    </Grid.RowDefinitions>
-
-                    <Button BackgroundColor="Red" CornerRadius="16" Grid.RowSpan ="2"
-                            Text="Image" Margin="8,8,8,8"/>
-
-                    <Label Margin="4,8,0,0" Grid.Row ="0" Grid.Column="1" TextColor="Black"
-                            Text="Жим лёжа" FontSize="20" FontAttributes="Bold"></Label>
-
-                    <Label  Margin="4,-10,0,0" Grid.Row ="1" Grid.Column="1"
-                            Text="4 подхода, 8-12 повторений, с весом 50-70 кг" TextTransform="Lowercase"
-                                FontSize="14" TextColor="Black" HorizontalOptions="Start"></Label>
-
-                </Grid>
-            </Grid>-->
-
         </StackLayout>
 
     </ScrollView>
-
-    <!-- <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="Kekaem" FontSize="36" FontAttributes="Bold"/>
-                        <Span Text="Privetik, ya tut oushu"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-
-        <Frame BackgroundColor="Blue" Margin="16">
-            <Label Text="New text, down" TextColor="White" FontSize="24"/>
-        </Frame>
-    </StackLayout> -->
 
 </ContentPage>

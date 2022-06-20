@@ -10,13 +10,12 @@ namespace StudentDateBasa
         {
             List<Members> mem = new List<Members>();
 
-            for (int i = 0; i < 3; i++) mem.Add(new Members() { name = Console.ReadLine(), age = Convert.ToInt32(Console.ReadLine()) });
+            for (int i = 0; i < 3; i++) mem.Add(new Members() { name = Console.ReadLine(), 
+                age = Convert.ToInt32(Console.ReadLine()) });
 
             Console.WriteLine("———————————————————");
             Console.WriteLine("");
             Console.WriteLine("Output:");
-
-
 
             foreach (var people in mem)
             {

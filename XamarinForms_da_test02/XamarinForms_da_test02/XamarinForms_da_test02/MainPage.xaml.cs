@@ -14,8 +14,7 @@ namespace XamarinForms_da_test02
         public MainPage()
         {
             InitializeComponent();
-
-            Title = "Начальная страница";
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         public void Button_Clicked(object sender, EventArgs args)

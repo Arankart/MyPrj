@@ -10,8 +10,9 @@ namespace XamarinForms_da_test02
         public App()
         {
             InitializeComponent();
-
+            NavigationPage.SetHasNavigationBar(this, false);
             MainPage = new NavigationPage(new MainPage());
+
         }
 
         protected override void OnStart()

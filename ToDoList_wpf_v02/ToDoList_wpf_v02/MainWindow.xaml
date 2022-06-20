@@ -1,0 +1,38 @@
+﻿<Window x:Class="ToDoList_wpf_v02.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToDoList_wpf_v02"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800" ScrollViewer.HorizontalScrollBarVisibility="Auto" MaxWidth="800" MaxHeight="503" MinWidth="800" MinHeight="500" FontFamily="PT Sans" ResizeMode="NoResize">
+    <Window.DataContext>
+        <local:TaskObjectList/>
+    </Window.DataContext>
+
+    <Grid ShowGridLines="false" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <ListView ItemsSource="{Binding taskList}" Grid.Row="1" Margin="0,16,0,0" Width="290">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Background="#d6d6d6" Width="260" Height="Auto">
+
+                        <TextBlock x:Name="title" Padding="16" FontSize="20">
+                            <Run Language="ru-ru" Text="{Binding title}"/></TextBlock>
+
+                        <TextBox x:Name="description"  MaxLength="0" 
+                            Padding="8,0,16,0" Background="#d6d6d6" BorderThickness="5,0,0,0"
+                            FontSize="16" TextWrapping="Wrap" TextChanged="TextBox_TextChanged"
+                            Text="{Binding description,Mode=TwoWay}"/>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+
+</Window>

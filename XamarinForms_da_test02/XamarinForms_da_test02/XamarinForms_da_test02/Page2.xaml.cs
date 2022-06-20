@@ -10,51 +10,103 @@ using Xamarin.Forms.Xaml;
 namespace XamarinForms_da_test02
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+
     public partial class Page2 : ContentPage
     {
+
         public int return_id;
 
         public InfoPage[] infos =
                 {
                     new InfoPage("Сегодня мы с тобой потренируем грудь и трицепц",
                     "Ниже ты найдёшь все упражнения, которые предстоит выполнить, в любом порядке. Давай выберем первое упражнение и начнём!",
-                    new List<PracticInfo>() {
-                        new PracticInfo("Подтягивания", "Lower 1 text in this place", "Image 1"),
-                        new PracticInfo("Жим от груди", "Lower 2 text in this place", "Image 2"),
-                        new PracticInfo("Узкий жим", "Lower 2 text in this place", "Image 2"),
-                        new PracticInfo("Разводка гантелей", "Lower 2 text in this place", "Image 2"),
-                        new PracticInfo("Разведение на трицепц в блоке", "Lower 3 text in this place", "Image 3")
+                    new List<PracticInfo>()
+                    {
+                        new PracticInfo("Подтягивания","kek","https://clck.ru/ajdLZ"),
+                        new PracticInfo("Жим лёжа","kek","https://clck.ru/ajdNF"),
+
                     }),
 
                     new InfoPage("Сегодня мы с тобой потренируем спину и бицепц",
                     "Ниже ты найдёшь все упражнения, которые предстоит выполнить, в любом порядке. " +
                     " Давай выберем первое упражнение и начнём!",
-                    new List<PracticInfo>() {
-                        new PracticInfo("Подтягивания широким хватом", "Lower 1 text in this place", "Image 1"),
-                        new PracticInfo("Становая тяга", "Lower 2 text in this place", "Image 2"),
-                        new PracticInfo("Подъём штанги на бицепц", "Lower 2 text in this place", "Image 2"),
-                        new PracticInfo("Тяга верхнего блока", "Lower 3 text in this place", "Image 3"),
-                        new PracticInfo("Подъём гантелей на бицепц", "Lower 3 text in this place", "Image 3")
+                    new List<PracticInfo>()
+                    {
+                        new PracticInfo("Подтягивания широким хватом","kek",""),
+                        new PracticInfo("Cтановая тяга", "Lower 3 text in this place",""),
                     }),
 
                     new InfoPage("Сегодня мы с тобой потренируем ноги и пресс",
                     "Ниже ты найдёшь все упражнения, которые предстоит выполнить, в любом порядке. " +
                     " Давай выберем первое упражнение и начнём!",
-                    new List<PracticInfo>() {
-                        new PracticInfo("Header 1", "Lower 1 text in this place", "Image 1"),
-                        new PracticInfo("Header 2", "Lower 2 text in this place", "Image 2"),
-                        new PracticInfo("Header 3", "Lower 3 text in this place", "Image 3")
-                    })
+                    new List<PracticInfo>())
                 };
 
+            
         public Page2(int id)
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+
+
+            int[] rnd = new int[2];
+
+            rnd = Random(0, 3);
 
             return_id = id;
 
+            // Заполнение тренировки упражнениями
+
+            switch (id)
+            {
+                case 0:
+
+                    for (int i = 0; i < 1; i++)
+                    {
+                        infos[id].lpi.Add(new PracticInfo(infos[id].breast[rnd[i]].header, infos[id].breast[rnd[i]].lower, infos[id].breast[rnd[i]].image));
+                    }
+
+                    for (int i = 0; i < 2; i++)
+                    {
+                        infos[id].lpi.Add(new PracticInfo(infos[id].triceps[rnd[i]].header, infos[id].triceps[rnd[i]].lower, infos[id].triceps[rnd[i]].image));
+                    };
+                    break;
+
+                case 1:
+                    for (int i = 0; i < 1; i++)
+                    {
+                        infos[id].lpi.Add(new PracticInfo(infos[id].back[rnd[i]].header, infos[id].back[rnd[i]].lower, infos[id].back[rnd[i]].image));
+                    }
+
+                    for (int i = 0; i < 2; i++)
+                    {
+                        infos[id].lpi.Add(new PracticInfo(infos[id].biceps[rnd[i]].header, infos[id].biceps[rnd[i]].lower, infos[id].biceps[rnd[i]].image ));
+                    };
+                    break;
+
+                case 2:
+                    for (int i = 0; i < 3; i++)
+                    {
+                        infos[id].lpi.Add(new PracticInfo(infos[id].legs[rnd[i]].header, infos[id].legs[rnd[i]].lower, infos[id].legs[rnd[i]].image));
+                    }
+                    break;
+            }
+
+
+
             // Создаём элементы страницы
 
+            
+/*
+            Label random = new Label()
+            {
+                Margin = new Thickness(16, 4, 16, 16),
+                FontAttributes = FontAttributes.Bold,
+                HorizontalTextAlignment = TextAlignment.Start,
+                Text = $"{rnd[0]}, {rnd[1]}, {rnd[2]}",
+                FontSize = 32,
+                TextColor = Color.White,
+            };*/
 
             Label infoLabel_main = new Label()
             {
@@ -63,7 +115,7 @@ namespace XamarinForms_da_test02
                 HorizontalTextAlignment = TextAlignment.Start,
                 Text = infos[id].topWelcomeInfo,
                 FontSize = 32,
-                TextColor = Color.Black,
+                TextColor = Color.White,
             };
 
             Label infoLabel_second = new Label()
@@ -73,7 +125,7 @@ namespace XamarinForms_da_test02
                 HorizontalTextAlignment = TextAlignment.Start,
                 Text = infos[id].downWelcomeInfo,
                 FontSize = 18,
-                TextColor = Color.Black,
+                TextColor = Color.LightGray,
             };
 
             Button button_returnToHome = new Button()
@@ -83,16 +135,16 @@ namespace XamarinForms_da_test02
                 Padding = 0,
                 FontSize = 18,
                 TextTransform = TextTransform.Lowercase,
-                TextColor = Color.Black,
-                BackgroundColor = Color.FromHex("#ECEFF1"),
+                TextColor = Color.White,
+                BackgroundColor = Color.FromHex("#181818"),
             };
 
             // Добавляем элементы страницы
 
             StackLayout stackLayout = new StackLayout()
             {
-                BackgroundColor = Color.FromHex("#ECEFF1"),
-                Children = { button_returnToHome, infoLabel_main, infoLabel_second }
+                BackgroundColor = Color.FromHex("#181818"),
+                Children = { /*random,*/ button_returnToHome, infoLabel_main, infoLabel_second }
             };
 
             ScrollView scrollView = new ScrollView() { };
@@ -109,8 +161,7 @@ namespace XamarinForms_da_test02
 
                     RowDefinitions =
                     {
-                        new RowDefinition { Height = 64 },
-                        new RowDefinition { Height = 64 }
+                        new RowDefinition { Height = 150}
                     },
 
                     ColumnDefinitions =
@@ -131,24 +182,21 @@ namespace XamarinForms_da_test02
                 Button image_bttn = new Button()
                 {
                     Margin = new Thickness(16),
-                    ImageSource = "https://vjoy.cc/wp-content/uploads/2019/05/1-54.jpg",
-                    //BackgroundColor = Color.Gray,
+                    ImageSource = infos[id].lpi[i].image,
                     CornerRadius = 16,
-                    ClassId = Convert.ToString(i),
-                    WidthRequest = 300,
-                    HeightRequest = 300,
+                    ClassId = Convert.ToString(i)
                 };
 
                 Label header_label = new Label
                 {
                     Text = infos[id].lpi[i].header,
                     Margin = new Thickness(0, 16, 16, 0),
-                    TextColor = Color.Black,
+                    TextColor = Color.White,
                     FontSize = 20,
                     FontAttributes = FontAttributes.Bold,
                 };
 
-                Label lower_label = new Label
+                /*Label lower_label = new Label
                 {
                     Text = infos[id].lpi[i].lower,
                     Margin = new Thickness(0, 0, 16, 0),
@@ -156,12 +204,12 @@ namespace XamarinForms_da_test02
                     FontSize = 14,
                     HorizontalOptions = LayoutOptions.Start,
                     TextTransform = TextTransform.Lowercase,
-                };
+                };*/
 
 
                 Frame bg_practic = new Frame()
                 {
-                    BackgroundColor = Color.FromHex("#FFFFFF"),
+                    BackgroundColor = Color.FromHex("#2C2C2C"),
                     CornerRadius = 16,
                     HasShadow = false,
                 };
@@ -175,12 +223,8 @@ namespace XamarinForms_da_test02
 
                 grid_elements.Children.Add(header_label, 1, 0);
 
-                grid_elements.Children.Add(lower_label, 1, 1);
 
-
-                Grid.SetRowSpan(image_bttn, 2);
                 Grid.SetColumnSpan(bg_practic, 2);
-                Grid.SetRowSpan(bg_practic, 2);
 
                 image_bttn.Clicked += ToPracticScreen;
 
@@ -235,7 +279,65 @@ namespace XamarinForms_da_test02
 
             }
 
-            await Navigation.PushAsync(new PracticPage(return_id, id));
+
+            // !!!!!!!!!! доработать назначения изображения на третью страницу с информацией !!!!!!!!!!!
+
+            await Navigation.PushAsync(new PracticPage(return_id, id, infos[return_id].lpi[return_id].image));
+        }
+
+        public int[] Random(int a, int b)
+        {
+            int[] chisla = new int[b];
+            Random rand = new Random((int)DateTime.Now.Ticks);
+
+            for (int j = 0; j < chisla.Length; j++)
+            {
+                chisla[j] = rand.Next(a, b);
+            }
+
+
+            foreach (int i in chisla)
+            {
+                switch (i)
+                {
+                    case 0:
+                        if (chisla[i] == chisla[1] || chisla[i] == chisla[2])
+                            chisla[i] = rand.Next(a, b);
+                        break;
+
+                    case 1:
+                        if (chisla[i] == chisla[0] || chisla[i] == chisla[2])
+                            chisla[i] = rand.Next(a, b);
+                        break;
+
+                    case 2:
+                        if (chisla[i] == chisla[1] || chisla[i] == chisla[0])
+                            chisla[i] = rand.Next(a, b);
+                        break;
+
+                }
+
+                switch (i)
+                {
+                    case 0:
+                        if (chisla[i] == chisla[1] || chisla[i] == chisla[2])
+                            chisla[i] = rand.Next(a, b);
+                        break;
+
+                    case 1:
+                        if (chisla[i] == chisla[0] || chisla[i] == chisla[2])
+                            chisla[i] = rand.Next(a, b);
+                        break;
+
+                    case 2:
+                        if (chisla[i] == chisla[1] || chisla[i] == chisla[0])
+                            chisla[i] = rand.Next(a, b);
+                        break;
+
+                }
+            }
+
+            return chisla;
         }
     }
 }

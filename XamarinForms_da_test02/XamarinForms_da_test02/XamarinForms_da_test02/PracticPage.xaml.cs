@@ -15,24 +15,26 @@ namespace XamarinForms_da_test02
 
         public int return_id;
 
-        public PracticPage(int id, string practicName)
+        public PracticPage(int id, string practicName, string image)
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
 
-            this.return_id = id;
+
+            return_id = id;
 
             StackLayout stackLayout = new StackLayout()
             {
-                BackgroundColor = Color.FromHex("#ECEFF1"),
+                BackgroundColor = Color.FromHex("#181818"),
             };
 
             Image imageFrame = new Image()
             {
-                //BackgroundColor = Color.Red,
+                BackgroundColor = Color.Red,
                 WidthRequest = 100,
                 HeightRequest = 348,
                 //Padding = new Thickness(0, 0, 0, 348),
-                Source = "https://vjoy.cc/wp-content/uploads/2019/05/1-54.jpg"
+                Source = image
             };
 
             Label text = new Label()
@@ -42,7 +44,7 @@ namespace XamarinForms_da_test02
                 FontAttributes = FontAttributes.Bold,
                 HorizontalTextAlignment = TextAlignment.Start,
                 FontSize = 32,
-                TextColor = Color.Black,
+                TextColor = Color.White,
             };
 
             Button button_returnToInfoScreen = new Button()
@@ -52,8 +54,8 @@ namespace XamarinForms_da_test02
                 Padding = 0,
                 FontSize = 18,
                 TextTransform = TextTransform.Lowercase,
-                TextColor = Color.Black,
-                BackgroundColor = Color.FromHex("#ECEFF1"),
+                TextColor = Color.White,
+                BackgroundColor = Color.FromHex("#181818"),
             };
 
             button_returnToInfoScreen.Clicked += ToInfoScreen;

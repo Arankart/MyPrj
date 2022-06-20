@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinForms_da_test02.Page2">
     <ContentPage.Content>
-        <ScrollView BackgroundColor="#ECEFF1">
+        <ScrollView BackgroundColor="#181818">
             <StackLayout Spacing="0">
 
                 <Button Text="назад" Margin="0,16,306,16"  Padding="0" FontSize="18" TextTransform="Lowercase" 
@@ -12,13 +12,13 @@
                         Clicked="ToMainScreen"/>
 
                 <Label Margin="16" FontAttributes="Bold" TextDecorations="None" HorizontalTextAlignment="Start" 
-               Text="Сегодня мы с тобой потренируем грудь и плечи" FontSize="32"  TextColor="Black">
+               Text="Сегодня мы с тобой потренируем грудь и плечи" FontSize="32"  TextColor="White">
                 </Label>
 
                 <Label Margin="16, 16, 16, 16" FontAttributes="None" TextDecorations="None" HorizontalTextAlignment="Start" 
                Text="Ниже ты найдёшь все упражнения, которые предстоит выполнить, 
                        в любом порядке. Давай выберем первое упражнение и начнём!"
-                       FontSize="18"  TextColor="Black">
+                       FontSize="18"  TextColor="White">
                 </Label>
             </StackLayout>
         </ScrollView>
