@@ -1,14 +1,14 @@
 class Training {
-  late int id;
+  late int? id;
   late String title;
   late String description;
   late int preparation;
   late int work;
   late int relax;
-  late int cylce;
+  late int cycle;
 
   Training(this.id, this.title, this.description, this.preparation, this.work,
-      this.relax, this.cylce);
+      this.relax, this.cycle);
 
   Map<String, dynamic> toMap() {
     final map = Map<String, dynamic>();
@@ -18,7 +18,7 @@ class Training {
     map["preparation"] = preparation;
     map["work"] = work;
     map["relax"] = relax;
-    map["cylce"] = cylce;
+    map["cycle"] = cycle;
     return map;
   }
 
@@ -29,6 +29,6 @@ class Training {
     preparation = map["preparation"];
     work = map["work"];
     relax = map["relax"];
-    cylce = map["cylce"];
+    cycle = map["cycle"];
   }
 }

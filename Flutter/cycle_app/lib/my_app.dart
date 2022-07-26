@@ -1,5 +1,5 @@
 import 'package:cycle_app/pages/training_data_page.dart';
-import 'package:cycle_app/pages/trainings_list.dart';
+import 'package:cycle_app/pages/trainings_list_page.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {

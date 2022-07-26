@@ -1,11 +1,9 @@
-import 'dart:html';
 import 'dart:io';
 
 import 'package:cycle_app/model/training_data_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-
 import 'package:sqflite/sqlite_api.dart';
 
 class DBProvider {
@@ -34,14 +32,15 @@ class DBProvider {
   Future<Database> _initDB() async {
     Directory dir = await getApplicationDocumentsDirectory();
     String path = join(dir.path, db_name);
+
+    print("path: " + path);
     return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
+  // Create
   void _createDB(Database db, int vertion) async {
     await db.execute(
-        "CREATE TABLE $table_name ($column_id INTEGER PRIMARY KEY AUTOINCREMENT, $column_title TEXT," +
-            " $column_description TEXT, $column_preparation INTEGER, $column_work INTEGER" +
-            " $column_relax INTEGER, $column_cycle INTEGER)");
+        "CREATE TABLE $table_name ($column_id INTEGER PRIMARY KEY AUTOINCREMENT, $column_title TEXT, $column_description TEXT, $column_preparation INTEGER, $column_work INTEGER, $column_relax INTEGER, $column_cycle INTEGER)");
   }
 
   // Read
