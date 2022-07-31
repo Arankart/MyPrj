@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cycle_app/model/training_data_model.dart';
@@ -61,11 +60,6 @@ class DBProvider {
   Future<Training> addTraining(Training training) async {
     Database db = await this.database;
     training.id = await db.insert(table_name, training.toMap());
-    // List<Training> lt = await getTrainings();
-    // lt.forEach((e) {
-    //   print("Id: ${e.id} , title: ${e.title}");
-    // });
-    // print("---------");
     return training;
   }
 

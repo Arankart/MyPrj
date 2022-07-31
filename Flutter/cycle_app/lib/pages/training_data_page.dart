@@ -19,10 +19,7 @@ class TrainingData extends StatefulWidget {
 }
 
 class _TrainingDataState extends State<TrainingData> {
-  Training? tren_change_data;
-  int? change_id;
-  late Future<List<Training>> _trainingListFuture;
-  List<Training>? _trainingList;
+  late Future<List<Training>> _trainingList;
   String? title = "Тренировка";
   late String? description = "";
   late int? preparation = 0;
@@ -47,43 +44,12 @@ class _TrainingDataState extends State<TrainingData> {
 
   updateTrainingList() {
     setState(() {
-      _trainingListFuture = DBProvider.db.getTrainings();
+      _trainingList = DBProvider.db.getTrainings();
     });
-  }
-
-  convert_data(int id) async {
-    _trainingList = await _trainingListFuture;
-    tren_change_data = _trainingList![id];
-    if (isUpdate == true) {
-      object_data_write();
-    }
-    print("ready");
-  }
-
-  updateList() {
-    _trainingListFuture = DBProvider.db.getTrainings();
-  }
-
-  object_data_write() {
-    controllerTitle.text = tren_change_data!.title;
-    controllerDescription.text = tren_change_data!.description;
-    controllerPreparation.text = tren_change_data!.preparation.toString();
-    controllerWork.text = tren_change_data!.work.toString();
-    controllerRelax.text = tren_change_data!.relax.toString();
-    controllerCycle.text = tren_change_data!.cycle.toString();
   }
 
   @override
   Widget build(BuildContext context) {
-    Object? set = ModalRoute.of(context)!.settings.arguments;
-    if (set != null) {
-      isUpdate = !isUpdate;
-      change_id = set as int?;
-      convert_data(change_id!);
-      print(
-          "Переданный id: ${change_id}, элемент ${_trainingList?[change_id as int].id} - ${_trainingList?[change_id as int].title} ");
-    }
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -113,15 +79,9 @@ class _TrainingDataState extends State<TrainingData> {
             ElevatedButton(
               onPressed: () {
                 if (isUpdate) {
-                  title = controllerTitle.text;
-                  description = controllerDescription.text;
-                  preparation = int.tryParse(controllerPreparation.text);
-                  work = int.tryParse(controllerWork.text);
-                  relax = int.tryParse(controllerRelax.text);
-                  cycle = int.tryParse(controllerCycle.text);
                   DBProvider.db
-                      .updateTraining(Training(change_id, title!, description!,
-                          preparation!, work!, relax!, cycle!))
+                      .updateTraining(Training(training_id, title!,
+                          description!, preparation!, work!, relax!, cycle!))
                       .then((value) {
                     setState(() {
                       isUpdate = false;
@@ -178,26 +138,10 @@ class _TrainingDataState extends State<TrainingData> {
                       },
                     ),
                   ),
-                  Block(
-                    name: "Подготовка",
-                    controller: controllerPreparation,
-                    isUpdate: isUpdate,
-                  ),
-                  Block(
-                    name: "Работа",
-                    controller: controllerWork,
-                    isUpdate: isUpdate,
-                  ),
-                  Block(
-                    name: "Отдых",
-                    controller: controllerRelax,
-                    isUpdate: isUpdate,
-                  ),
-                  Block(
-                    name: "Цикл",
-                    controller: controllerCycle,
-                    isUpdate: isUpdate,
-                  ),
+                  Block(name: "Подготовка", controller: controllerPreparation),
+                  Block(name: "Работа", controller: controllerWork),
+                  Block(name: "Отдых", controller: controllerRelax),
+                  Block(name: "Цикл", controller: controllerCycle),
                 ],
               ),
             ),
@@ -210,13 +154,8 @@ class _TrainingDataState extends State<TrainingData> {
 
 class Block extends StatelessWidget {
   String name;
-  bool isUpdate = false;
   late TextEditingController controller;
-  Block(
-      {Key? key,
-      required this.name,
-      required this.controller,
-      required this.isUpdate})
+  Block({Key? key, required this.name, required this.controller})
       : super(key: key);
 
   @override
@@ -245,9 +184,8 @@ class Block extends StatelessWidget {
                   flex: 1,
                   child: TextFormField(
                     controller: controller,
-                    decoration: InputDecoration(
-                        hintText: (name != "Цикл" ? "0 секунд" : "0"),
-                        enabledBorder: InputBorder.none),
+                    decoration: const InputDecoration(
+                        hintText: "0", enabledBorder: InputBorder.none),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -291,6 +229,22 @@ Widget divider(String name) {
       : SizedBox();
 }
 
+// Widget descriptionFunc() {
+//   return Form(
+//     child: TextFormField(
+//       decoration: const InputDecoration(
+//           // icon: Icon(Icons.edit),
+//           hintText: "Описание тренировки",
+//           hintStyle: TextStyle(
+//               color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20),
+//           enabledBorder: InputBorder.none),
+//       onSaved: (value) {
+//         myRootState = value!;
+//       },
+//     ),
+//   );
+// }
+
 Widget sizeBox(double sizeH, double sizeW) {
   return SizedBox(
     height: sizeH,
@@ -307,6 +261,10 @@ Widget elButton(
       icon,
       color: Colors.white,
     ),
+    // Text(
+    //   icon,
+    //   style: TextStyle(color: Colors.white, fontSize: 30),
+    // ),
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all(Colors.black),
     ),
@@ -339,8 +297,7 @@ class MyInheritedWidget extends InheritedWidget {
 
   @override
   bool updateShouldNotify(MyInheritedWidget oldWidget) {
-    return myState!._trainingListFuture !=
-        oldWidget.myState!._trainingListFuture;
+    return myState!._trainingList != oldWidget.myState!._trainingList;
   }
 
   static MyInheritedWidget? of(BuildContext context) {
