@@ -13,12 +13,24 @@ class TrainingListPage extends StatelessWidget {
       appBar: AppBar(
           backgroundColor: Colors.white,
           shadowColor: Colors.white.withOpacity(0.04),
-          title: Text(
-            "Твои тренировки",
-            style: txtStyle(16, FontWeight.w600),
+          title: Row(
+            children: [
+              Text(
+                "Твои тренировки",
+                style: txtStyle(16, FontWeight.w600),
+              ),
+              Expanded(child: sizeBox(16, 0)),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.settings_outlined),
+                iconSize: 30,
+              )
+            ],
           )),
       body: TrainingsList(),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.grey.shade900,
+        foregroundColor: Colors.grey.shade300,
         onPressed: (() {
           Navigator.pushNamed(context, "/training_set");
         }),
@@ -37,8 +49,9 @@ class TrainingsList extends StatefulWidget {
 
 class _TrainingsListState extends State<TrainingsList> {
   Future<List<Training>>? _trainingListFuture;
+  List<Training>? list_training = [];
 
-  List<Training>? _trainingList;
+  int? id_for_delete;
 
   bool isUpdate = false;
 
@@ -49,39 +62,106 @@ class _TrainingsListState extends State<TrainingsList> {
   }
 
   updateList() {
-    setState() {
+    setState(() {
       _trainingListFuture = DBProvider.db.getTrainings();
-      trainingView();
+    });
+    print("Список обновился");
+  }
+
+  deleteObj() {
+    if (id_for_delete != null) {
+      DBProvider.db.deleteTraining(id_for_delete as int);
     }
   }
 
   trainingView() async {
-    _trainingList = await _trainingListFuture;
+    List<Training>? lt = await _trainingListFuture;
+    // lt?.forEach((e) {
+    //   count++;
+    //   print("Id: ${count} , title: ${e.title}");
+    // });
+    // print("---------");
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(builder: (context, snapshot) {
-      return ListView.builder(
-        itemCount: 30,
-        itemBuilder: (context, index) {
-          return Text("${_trainingList}");
-        },
-      );
-    });
+    return MyIheritedListWidget(
+      myListState: this,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: FutureBuilder(
+            future: _trainingListFuture,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  itemCount: (snapshot.data as List<Training>).length,
+                  itemBuilder: (contex, index) {
+                    return card(context,
+                        (snapshot.data as List<Training>)[index], index);
+                  },
+                );
+              } else {
+                return Center(
+                    child: CircularProgressIndicator(
+                  color: Colors.black,
+                ));
+              }
+            }),
+      ),
+    );
   }
 }
 
-// sizeBox(30, 0),
-// textButton("Добавить тренировку", Colors.grey.shade200,
-//     Colors.grey.shade400, context, "/training_set"),
+Widget textButton(String text, Color colorBttn, Color colorText,
+    dynamic context, String path, Training training, int index) {
+  return ElevatedButton(
+    onPressed: () {
+      print("context:" + context.toString());
+      print("path:" + path);
+
+      if (path != "") {
+        print("id_trains:" + index.toString());
+        int? id_trains = index;
+        Navigator.pushNamed(context, path, arguments: id_trains);
+      }
+    },
+    child: Text(
+      text,
+      style: TextStyle(color: colorText, fontSize: 18),
+    ),
+    style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+        backgroundColor: MaterialStateProperty.all(colorBttn),
+        shadowColor: MaterialStateProperty.all(Colors.black.withOpacity(0.04)),
+        minimumSize: MaterialStateProperty.all(Size(0, 42))),
+  );
+}
+
+TextStyle txtStyle(double size, FontWeight weight) {
+  return TextStyle(color: Colors.black, fontSize: size, fontWeight: weight);
+}
 
 Widget card(dynamic context, Training training, int index) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
-      Text("$index ${training.title}", style: txtStyle(24, FontWeight.w600)),
+      sizeBox(32, 0),
+      Row(
+        children: [
+          Text("${index + 1}. ${training.title}",
+              style: txtStyle(24, FontWeight.w600)),
+          Expanded(child: sizeBox(16, 0)),
+          IconButton(
+            onPressed: () {
+              DBProvider.db.deleteTraining(index + 1);
+            },
+            icon: Icon(Icons.delete),
+            color: Color(0xFFFF6060),
+          )
+        ],
+      ),
       sizeBox(16, 0),
       Text(
         training.description,
@@ -91,12 +171,12 @@ Widget card(dynamic context, Training training, int index) {
       Row(
         children: [
           Expanded(
-              child: textButton("Изменить", Colors.grey, Colors.white, context,
-                  "/training_set")),
-          sizeBox(0, 24),
+              child: textButton("Изменить", Color(0xFFFF6060), Colors.white,
+                  context, "/training_set", training, index)),
+          sizeBox(0, 40),
           Expanded(
-              child:
-                  textButton("Старт", Colors.black, Colors.white, context, "")),
+              child: textButton("Старт", Colors.black, Colors.white, context,
+                  "", training, index)),
         ],
       ),
       sizeBox(32, 0),
@@ -105,24 +185,20 @@ Widget card(dynamic context, Training training, int index) {
   );
 }
 
-Widget textButton(String text, Color colorBttn, Color colorText,
-    dynamic context, String path) {
-  return ElevatedButton(
-    onPressed: () {
-      if (path != "") {
-        Navigator.pushNamed(context, path);
-      }
-    },
-    child: Text(
-      text,
-      style: TextStyle(color: colorText, fontSize: 18),
-    ),
-    style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(colorBttn),
-        shadowColor: MaterialStateProperty.all(Colors.black.withOpacity(0.04))),
-  );
-}
+class MyIheritedListWidget extends InheritedWidget {
+  final Widget child;
+  _TrainingsListState myListState;
 
-TextStyle txtStyle(double size, FontWeight weight) {
-  return TextStyle(color: Colors.black, fontSize: size, fontWeight: weight);
+  MyIheritedListWidget(
+      {Key? key, required this.child, required this.myListState})
+      : super(key: key, child: child);
+
+  static MyIheritedListWidget? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<MyIheritedListWidget>();
+  }
+
+  @override
+  bool updateShouldNotify(MyIheritedListWidget oldWidget) {
+    return true;
+  }
 }
